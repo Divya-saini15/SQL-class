@@ -7,19 +7,25 @@ const connection = mysql.createConnection({
     password:'redhat',
     database:'sql_app'
   });
+//Inserting new(single data) data 
+// let q = "INSERT INTO data (id,username,email,psw) VALUES (?,?,?,?)";
+// let user = [101,"divyasaini007","divyasaini15@gmail.com","divya1234"];
 
-
+let q = "INSERT INTO data (id,username,email,psw) VALUES ?";
+let user =[ [102,"divyasaini007b","divyasaini15@gmailb.com","divya1234b"],
+            [103,"divyasaini007c","divyasaini15@gmailc.com","divya1234c"]];
 
 try{
-    connection.query("SHOW TABLES",(err,result)=>{
+    connection.query(q,[user],(err,result)=>{
     if (err) throw err;
-    console.log(result,"hee");
+    console.log(result);
     
   });
 }catch(err){
     console.log(err);
 
 }
+connection.end();
 
 
  let getRandomUsser =   () => {
@@ -30,6 +36,7 @@ try{
       password: faker.internet.password(),
       
     };
+    
 
   }
 
